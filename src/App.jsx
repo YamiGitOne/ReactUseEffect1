@@ -3,13 +3,18 @@ import { useEffect, useState } from "react";
 const App = () => {
   const [counter, setCounter] = useState(0);
   const [users, setUsers] = useState(null);
+  
   console.log("App");
     useEffect (() => {
       console.log("useEffect");
-    fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-    .then((data) => {
-      setUsers(data)});
+      async function fetchData(){
+        const res = await fetch (
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const data = await res.json();
+        setUsers(data);
+      }
+      fetchData();
     }, []);
 
     if (!users) return <div>Cargando...</div>;

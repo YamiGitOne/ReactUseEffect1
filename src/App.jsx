@@ -15,10 +15,12 @@ const App = () => {
 
   console.log("App");
 
-    useEffect (() => {
-      console.log("useEffect");
-      fetchData(setUsers);
-    }, []);
+  
+  //lo envie a useFetch.js en hooks para hacerlo dinámico
+    //useEffect (() => {
+     // console.log("useEffect");
+      //fetchData(setUsers);
+    //}, []);
 
     if (!users) return <div>Cargando...</div>;
   return <>

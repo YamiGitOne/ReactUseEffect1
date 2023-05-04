@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const App = () => {
   const [counter, setCounter] = useState(0);
   const [users, setUsers] = useState(null);
-
+  console.log("App");
     useEffect (() => {
       console.log("useEffect");
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -12,6 +12,7 @@ const App = () => {
       setUsers(data)});
     }, []);
 
+    if (!users) return <div>Cargando...</div>;
   return <>
   <h1>UseEffect</h1>
   <button onClick={() => setCounter(counter +1)}>Counter : {counter}</button>

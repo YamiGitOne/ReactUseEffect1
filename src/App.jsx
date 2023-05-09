@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
-
-console.log("fuera de App");
-const fetchData = async (setUsers) => {
-  const res = await fetch (
-    "https://jsonplaceholder.typicode.com/users"
-  );
-  const data = await res.json();
-  setUsers(data);
-};
+import { useState } from "react";
+import { useFetch } from './hooks/useFetch'
 
 const App = () => {
   const [counter, setCounter] = useState(0);
-  const [users, setUsers] = useState(null);
 
   console.log("App");
+const { data, loading, error } = useFetch("https://jsonplaceholder.typicode.com/users")
 
-  useEffect (() => {
-    console.log("useEffect");
-    fetchData(setUsers);
-  },[]);
-
-    if (!users) return <div>Cargando...</div>;
+    if (loading) return <div>Cargando...</div>;
+    if (error) return <div>{ error }</div>;
   return <>
   <h1>UseEffect</h1>
   <button onClick={() => setCounter(counter +1)}>Counter : {counter}</button>
   <ul>
     {
-     users.map(user => (
-      <li key={user.id}>{user.name}</li>
+     data.map(data => (
+      <li key={data.id}>{data.name}</li>
      )) 
     }
   </ul>

@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-console.log("fuera de la app");
-const fetchData = async(setUsers) =>{
-  const res = await fetch (
-    "https://jsonplaceholder.typicode.com/users"
-  );
-  const data = await res.json();
-  setUsers(data);
-}
+
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -15,12 +8,21 @@ const App = () => {
 
   console.log("App");
 
+  useCallback;
   
-  //lo envie a useFetch.js en hooks para hacerlo dinámico
-    //useEffect (() => {
-     // console.log("useEffect");
-      //fetchData(setUsers);
-    //}, []);
+    const fetchData = useCallback(async () => {
+        const res = await fetch (
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const data = await res.json();
+        setUsers(data);
+      },[])
+
+
+  useEffect (() => {
+    console.log("useEffect");
+    fetchData();
+  },[]);
 
     if (!users) return <div>Cargando...</div>;
   return <>
